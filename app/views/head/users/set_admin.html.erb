@@ -1,0 +1,5 @@
+<%= form_tag(controller: :users , action: :set_admin, method: :post)  do %>
+  <%= label_tag "Назначить администратором пользователя " %></br>
+  <%= number_field_tag :user_id, params[:user_id], placeholder: 'Номер анонима'%></br>
+  <%= submit_tag "Назначить" %></br>
+<% end %>

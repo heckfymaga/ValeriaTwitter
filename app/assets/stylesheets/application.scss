@@ -10,7 +10,102 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
+ *= require trix
  *= require_tree .
  *= require_self
  */
 @import "bootstrap";
+body{
+  li {
+    list-style-type: none; /* Убираем маркеры */
+  }
+  ul {
+    margin-left: 0; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+  }
+  a:hover{
+    text-decoration: none;
+  }
+  font-family: 'Fira Sans',sans-serif;
+}
+.pagination {
+  background: #fff;
+  cursor: default;
+  a, span, em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px;
+  }
+  .disabled {
+    color: #6c757d;
+    border: 1px solid #dddddd;
+  }
+  .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #2e6ab1;
+    color: white;
+    border: 1px solid #dee2e6;
+  }
+  a {
+    text-decoration: none;
+    color: #105cb6;
+    border: 1px solid #9aafe5;
+    &:hover, &:focus {
+      color: #000033;
+    }
+  }
+  .page_info {
+    background: #2e6ab1;
+    color: white;
+    padding: 0.4em 0.6em;
+    width: 22em;
+    margin-bottom: 0.3em;
+    text-align: center;
+    b {
+      color: #000033;
+      background: #2e6ab1 + 60;
+      padding: 0.1em 0.25em;
+    }
+  }
+}
+
+.tab{
+  margin-bottom: 10px;
+  .tab_menu{
+    color: #6f7577;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-right: 10px;
+    letter-spacing: .8px;
+    font-weight: bold;
+    transition: all .3s ease-in-out;
+    &:hover{
+      color: #548eaa;
+    }
+  }
+  .active{
+    border-bottom: 2px solid #6f7577;
+  }
+}
+.main_page{
+  margin-top: 25px;
+}
+.actions{
+  .sign{
+    margin-top: 10px;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+.about{
+  color: #222;
+  font-size: 18px;
+  line-height: 1.56;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-style: italic;
+}

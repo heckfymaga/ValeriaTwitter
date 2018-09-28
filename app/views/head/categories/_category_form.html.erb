@@ -1,0 +1,14 @@
+<%= form_for [:head, @category] do |f| %>
+  <div><!--поля-->
+    <%= f.label 'Название' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div><!--поля-->
+    <%= f.label 'Родительская категория' %>
+    <%= f.collection_select :parent_id, @categories, :id, :name, {include_blank: true}, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.submit 'Сохранить' %>
+    <%= link_to 'Назад', :back %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<div class="post">
+  <% if user_signed_in? %>
+    <div class="post_admin">
+      <% if current_user.allowed?(@post) %>
+        <%= link_to 'Изменить', edit_post_path(@post), class: 'btn btn-sm btn-outline-info' %>
+        <%= link_to 'Удалить', post_path(@post), method: :delete, data: {confirm: 'Вы уверены?'}, class: 'btn btn-sm btn-outline-danger' %>
+      <% end %>
+    </div>
+  <% end %>
+  <span class="post_user_image"><%= image_tag @post.user.avatar.mini %></span>
+  <span class="post_user"><%= link_to "Аноним#{@post.user.id}", user_path(@post.user) %></span>
+  <span class="post_time"><%= @post.created_at.to_date.strftime("%d %B, %Y") %></span>
+  <div class="post_title"><%= @post.title %></div>
+  <div class="post_tags"><%= get_tags(@post) if @post.tags.any? %></div>
+  <div class="post_image"><%= image_tag @post.image.url(:thumb) if @post.image? %></div>
+  <div class="post_text"><%= @post.body.html_safe %></div>
+</div>

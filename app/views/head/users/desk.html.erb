@@ -1,0 +1,28 @@
+<div class="desk">
+  <div class="desk_top">Рабочий кабинет</div>
+  <span class="change_category">
+    <%= link_to 'Изменить категории', head_categories_path, class: 'btn btn-sm btn-outline-success' %>
+  </span>
+
+  <% if @admins.present? %>
+    <div class="desk_title">Администраторы сайта</div>
+    <%= render "shared/user", users: @admins %>
+  <% end %>
+
+  <% if @heads.present? %>
+    <div class="desk_title_second">Главные администраторы сайта</div>
+    <%= render "shared/user", users: @heads if @heads.present? %>
+  <% end %>
+  <div class="desk_title_second">Назначить пользователя</div>
+  <div class="assign">
+    <%= form_tag(controller: :users, action: :set, method: :post) do %>
+      <div class="">
+        <%= number_field_tag :user_id, min: 1 %></br>
+      </div>
+      <div class="">
+        <%= collection_select :user, :role_id, Role.all, :id, :name %>
+      </div>
+      <%= submit_tag "Назначить", class: 'btn btn-sm btn-success' %></br>
+    <% end %>
+  </div>
+</div>

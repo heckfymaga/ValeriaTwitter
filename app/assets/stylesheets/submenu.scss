@@ -1,0 +1,33 @@
+.sub_menu{
+  width: 100%;
+  background-color: #F7F7F7;
+  word-wrap: break-word;
+}
+.sub_menu li{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.sub_menu_link {
+  font-size: 14px;
+  color: #548eaa;
+  display: block;
+  border-top: 1px solid darkgray;
+  font-weight: 500;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.sub_menu_link:hover{
+  color: #9197ac;
+  text-decoration: none;
+}
+.sub_menu_top{
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #505c66;
+  white-space: nowrap;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 50px;
+  text-align: center;
+}

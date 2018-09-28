@@ -1,0 +1,40 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Название</th>
+    <th scope="col">Родитель</th>
+    <th scope="col">Ответственные</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @categories.each_with_index do |category, index| %>
+  <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td><%= category.name %></td>
+      <td><%= category.parent.name if category.parent.present? %></td>
+      <td><%= category.users.map(&:id).join(', ') %></td>
+    <td>
+      <div class="change">
+        <%= link_to  edit_head_category_path(category) do  %>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        <% end %>
+      </div>
+    </td>
+      <td>
+        <div class="trash">
+          <%= link_to head_category_path(category), method: :delete, data: { confirm: 'Вы уверены ?' }  do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
+        </div>
+      </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+<div>
+  <%= link_to 'Создать категорию', new_head_category_path, class: 'btn btn-sm btn-outline-info' %>
+  <%= link_to 'Назад', :back, class: 'btn btn-sm btn-outline-secondary' %>
+</div>

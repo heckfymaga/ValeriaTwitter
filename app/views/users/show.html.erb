@@ -1,0 +1,38 @@
+<div class="user">
+  <div>
+    <span class="user_image"><%= image_tag @user.avatar.major %></span>
+    <span class="user_name">Аноним<%= @user.id %></span>
+    <%= link_to 'Заблокировать пользователя', admin_user_path(@user), method: :delete, data: {confirm: 'Вы уверены?'}, class: 'btn btn-sm btn-outline-danger user_subscribe' if !current_user.normal? and current_user.id != @user.id %>
+    <span class="user_subscribe">
+      <%= link_to 'Подписаться', subscribe_user_path(@user), method: :patch, class: 'btn btn-sm btn-outline-success' unless current_user.user_subscribed?(@user) %>
+      <%= link_to 'Отписаться', subscribe_user_path(@user), method: :patch, class: 'btn btn-sm btn-outline-danger' if current_user.user_subscribed?(@user) %>
+    </span>
+  </div>
+  <% if current_user.head? and @user.admin? %>
+    <div class="user_head_btn">
+      <div class="user_title" >Назначить ответственным за категории</div>
+        <%= form_tag(controller: 'head/users', action: :assign, method: :post) do %>
+          <div class="form-group">
+            <%= collection_select :category, :category_id, @categories, :id, :name, class: 'custom-select custom-select-sm' %>
+            <%= submit_tag "Назначить", class: 'btn btn-sm btn-outline-success' %>
+          </div>
+        <% end %>
+        <%= form_tag(controller: 'head/users', action: :dismiss, method: :post) do %>
+          <div class="form-group">
+            <%= collection_select :category, :category_id, @categories, :id, :name, class: 'form-control' %>
+            <%= submit_tag "Отстранить", class: 'btn btn-sm btn-outline-danger' %>
+          </div>
+        <% end %>
+      <% if @user.categories.any? %>
+        <div class="user_title" >Данный администратор ответственен за категории</div>
+        <% @user.categories.map do |category| %>
+          <%= link_to category.name, category_path(category), class: 'btn btn-sm btn-outline-secondary ' %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="posts">
+    <div class="user_title">Публикации</div>
+    <%= render @posts %>
+  </div>
+</div>

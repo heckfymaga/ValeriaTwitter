@@ -1,0 +1,14 @@
+<% if categories.any? %>
+  <div class="sub_menu">
+    <div class="menu">
+      <div class="sub_menu_top">Категории</div>
+      <ul>
+        <% categories.each do |category| %>
+          <li>
+            <%= link_to category.name, category_path(category), class: 'sub_menu_link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<div class="post">
+  <% users.each do |user| %>
+    <div>
+      <span class="post_user_image"><%= image_tag user.avatar.mini %></span>
+      <span class="post_user"><%= link_to "Аноним#{user.id}", user_path(user) %></span>
+    </div>
+  <% end %>
+</div>

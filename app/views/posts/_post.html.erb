@@ -1,0 +1,11 @@
+<div class="post">
+  <span class="post_user_image"><%= image_tag post.user.avatar.mini %></span>
+  <span class="post_user"><%= link_to "Аноним#{post.user.id}", user_path(post.user) %></span>
+  <span class="post_time"><%= post.created_at.to_date.strftime("%d %B, %Y") %></span>
+  <div class="post_title"><%= link_to post.title, post_path(post) %></div>
+  <div class="post_tags"><%= get_tags(post) if post.tags.any? %></div>
+  <span class="post_category"><%= link_to post.category.name, post.category if post.category.present? %></span>
+  <div class="post_image"><%= image_tag post.image.url(:thumb) if post.image? %></div>
+  <div class="post_summary"><%= post.summary %></div>
+  <div class="post_read"><%= link_to 'Читать дальше', post_path(post), class: 'btn btn-sm btn-outline-info' %></div>
+</div>

@@ -1,0 +1,6 @@
+<div class="tab">
+  <%= link_to 'Все посты', posts_path, class: "tab_menu #{'active' if current_page?(posts_path) or current_page?(root_path)}" %>
+  <%= link_to 'Подписки', subscribes_posts_path, class: "tab_menu #{'active' if current_page?(subscribes_posts_path)}" if user_signed_in? %>
+</div>
+<%= render @posts%>
+<%= will_paginate @posts, previous_label: h("<"), next_label: h(">") if user_signed_in?%>

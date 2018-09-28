@@ -1,0 +1,48 @@
+<h2>Изменить данные</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :multipart => true }) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div><br />
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Ожидание подтверждения: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <% if current_user.avatar.url.present? %>
+    <div><%= f.label 'Аватар' %></div>
+    <%= image_tag(current_user.avatar.major) %>
+  <% end %>
+  <%= f.file_field :avatar %>
+  <%= f.hidden_field :avatar_cache %>
+
+  <div class="field">
+    <%= f.label 'Пароль' %> <i>(оставте пустым если не хотите менять)</i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> символов минимум</em>
+    <% end %>
+  </div><br />
+
+  <div class="field">
+    <%= f.label 'Подтвердите пароль' %><i>(оставте пустым если не хотите менять)</i><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div><br />
+
+  <div class="field">
+    <%= f.label 'Пароль' %> <i>(необходим текущий пароль для подтверждения изменений)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div><br />
+
+  <div class="actions">
+    <%= f.submit "Изменить", class: 'btn btn-sm btn-outline-info'  %>
+  </div><br />
+<% end %>
+
+<h3>Удалить мой аккаунт</h3>
+
+<p><%= button_to "Удалить", registration_path(resource_name), data: { confirm: "Вы уверены ?" }, method: :delete , class: 'btn btn-sm btn-outline-danger' %></p>
+

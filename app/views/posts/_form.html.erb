@@ -1,0 +1,45 @@
+<% if @post.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @post, html: { multipart: true } do |f| %>
+  <div class="form-group"><!--поля-->
+    <%= f.label 'Название' %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Краткое содержание' %>
+    <%= f.text_area :summary, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <div><%= f.label 'Главное изображение' %></div>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Статья' %>
+    <%= f.trix_editor :body, class: 'editor' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Тэги' %>
+    <%= f.text_field :all_tags, class: 'form-control'%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Категория' %>
+    <%= f.collection_select :category_id, Category.order(:name), :id, :name, {include_blank: true}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Сохранить', class: 'btn btn-outline-dark btn_form' %>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+.table{
+  .category_name{
+    font-family: 'Lato', sans-serif;
+  }
+  .trash{
+    float: left;
+    margin-right: 1em;
+    float: right;
+    i{
+      color: #ff6d56;
+      transition: all .4s ease-in-out;
+      &:hover{
+        color: red;
+      }
+    }
+  }
+  .change{
+    margin-right: 1em;
+    float: right;
+    i{
+      color: dodgerblue;
+      transition: all .4s ease-in-out;
+      &:hover{
+        color: blue;
+      }
+    }
+  }
+}
+.category{
+  .category_name{
+    font-size: 20px;
+    color: #343434;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+  .category_subscribe{
+    float: right;
+  }
+}

@@ -1,0 +1,10 @@
+<div class="category">
+  <%= render 'shared/breadcrumb', category: @category %>
+  <span class="category_name"><%= @category.name %></span>
+  <span class="category_subscribe">
+    <%= link_to 'Подписаться', subscribe_category_path(@category), method: :patch, class: 'btn btn-sm btn-outline-success' unless current_user.category_subscribed?(@category) if user_signed_in? %>
+    <%= link_to 'Отписаться', subscribe_category_path(@category), method: :patch, class: 'btn btn-sm btn-outline-danger' if current_user.category_subscribed?(@category) if user_signed_in? %></span>
+  <div class="category_name">Публикации</div>
+  <%= render @posts %>
+  <%= will_paginate @posts, previous_label: h("<"), next_label: h(">") %>
+</div>

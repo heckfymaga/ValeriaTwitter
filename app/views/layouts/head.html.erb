@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anonymous Diaries</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="#">Главный Администратор</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">О сайте <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Лента', posts_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Новая статья', new_post_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'О сайте', new_post_path, class: 'nav-link' %>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Поиск", class: 'form-control mr-sm-2' %>
+        <%= submit_tag "Поиск", class: 'btn btn-outline-success my-2 my-sm-0' %>
+      <% end %>
+    </form>
+    <ul class="navbar-nav pull-xs-right">
+      <% if user_signed_in? %><!-- Проверка на вход -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Пользователь
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'Личный кабинет', user_path(current_user), class: 'dropdown-item' %>
+            <%= link_to 'Рабочий кабинет', desk_head_user_path(current_user), class: 'dropdown-item' %>
+            <%= link_to 'Настройки', edit_user_registration_path, class: 'dropdown-item' %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Вход', new_user_session_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Регистрация', new_user_registration_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <% flash.each do |name, message| %>
+          <div class="alert <%= bootstrap_class_for(name) %>">
+            <button class="close" data-dismiss="alert">&times;</button>
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= yield %>
+  </div>
+</body>
+</html>
